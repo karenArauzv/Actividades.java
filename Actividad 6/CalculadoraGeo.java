@@ -1,0 +1,174 @@
+import java.util.Scanner;
+
+public class CalculadoraGeo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        final int MAX_OPERACIONES = 100;
+        double[] resultados = new double[MAX_OPERACIONES];
+        int operacionCount = 0;
+
+        while (true) {
+            System.out.println("\nSelecciona la figura geométrica:");
+            System.out.println("1. Círculo");
+            System.out.println("2. Cuadrado");
+            System.out.println("3. Triángulo");
+            System.out.println("4. Rectángulo");
+            System.out.println("5. Pentágono");
+            System.out.println("6. Mostrar resultados");
+            System.out.println("7. Salir");
+            System.out.print("Ingrese el número de la figura: ");
+
+            int figura = obtenerEntradaEntero(scanner);
+
+            if (figura == 7) {
+                break;
+            }
+
+            if (figura == 6) {
+                mostrarResultados(resultados, operacionCount);
+                continue;
+            }
+
+            if (figura < 1 || figura > 5) {
+                System.out.println("Figura no válida.");
+                continue;
+            }
+
+            System.out.println("Selecciona la operación:");
+            System.out.println("1. Área");
+            System.out.println("2. Perímetro");
+            System.out.print("Ingrese el número de la operación: ");
+
+            int operacion = obtenerEntradaEntero(scanner);
+
+            if (operacion < 1 || operacion > 2) {
+                System.out.println("Operación no válida.");
+                continue;
+            }
+
+            double resultado = 0;
+
+            switch (figura) {
+                case 1: // Círculo
+                    resultado = calcularCirculo(scanner, operacion);
+                    break;
+                case 2: // Cuadrado
+                    resultado = calcularCuadrado(scanner, operacion);
+                    break;
+                case 3: // Triángulo
+                    resultado = calcularTriangulo(scanner, operacion);
+                    break;
+                case 4: // Rectángulo
+                    resultado = calcularRectangulo(scanner, operacion);
+                    break;
+                case 5: // Pentágono
+                    resultado = calcularPentagono(scanner, operacion);
+                    break;
+            }
+
+            if (operacionCount < MAX_OPERACIONES) {
+                resultados[operacionCount++] = resultado;
+                System.out.println("El resultado es: " + resultado);
+            } else {
+                System.out.println("Capacidad de almacenamiento de resultados alcanzada.");
+            }
+        }
+
+        scanner.close();
+    }
+
+    private static int obtenerEntradaEntero(Scanner scanner) {
+        while (!scanner.hasNextInt()) {
+            System.out.println("Entrada no válida. Por favor ingrese un número entero.");
+            scanner.next(); // Limpiar entrada incorrecta
+        }
+        return scanner.nextInt();
+    }
+
+    private static double calcularCirculo(Scanner scanner, int operacion) {
+        System.out.print("Ingrese el radio del círculo: ");
+        double radio = obtenerEntradaDouble(scanner);
+
+        if (operacion == 1) {
+            return Math.PI * radio * radio;
+        } else { // operacion == 2
+            return 2 * Math.PI * radio;
+        }
+    }
+
+    private static double calcularCuadrado(Scanner scanner, int operacion) {
+        System.out.print("Ingrese el lado del cuadrado: ");
+        double lado = obtenerEntradaDouble(scanner);
+
+        if (operacion == 1) {
+            return lado * lado;
+        } else { // operacion == 2
+            return 4 * lado;
+        }
+    }
+
+    private static double calcularTriangulo(Scanner scanner, int operacion) {
+        if (operacion == 1) {
+            System.out.print("Ingrese la base del triángulo: ");
+            double base = obtenerEntradaDouble(scanner);
+            System.out.print("Ingrese la altura del triángulo: ");
+            double altura = obtenerEntradaDouble(scanner);
+            return 0.5 * base * altura;
+        } else { // operacion == 2
+            System.out.print("Ingrese el primer lado del triángulo: ");
+            double lado1 = obtenerEntradaDouble(scanner);
+            System.out.print("Ingrese el segundo lado del triángulo: ");
+            double lado2 = obtenerEntradaDouble(scanner);
+            System.out.print("Ingrese el tercer lado del triángulo: ");
+            double lado3 = obtenerEntradaDouble(scanner);
+            return lado1 + lado2 + lado3;
+        }
+    }
+
+    private static double calcularRectangulo(Scanner scanner, int operacion) {
+        System.out.print("Ingrese la base del rectángulo: ");
+        double base = obtenerEntradaDouble(scanner);
+        System.out.print("Ingrese la altura del rectángulo: ");
+        double altura = obtenerEntradaDouble(scanner);
+
+        if (operacion == 1) {
+            return base * altura;
+        } else { // operacion == 2
+            return 2 * (base + altura);
+        }
+    }
+
+    private static double calcularPentagono(Scanner scanner, int operacion) {
+        if (operacion == 1) {
+            System.out.print("Ingrese el apotema del pentágono: ");
+            double apotema = obtenerEntradaDouble(scanner);
+            System.out.print("Ingrese el perímetro del pentágono: ");
+            double perimetro = obtenerEntradaDouble(scanner);
+            return (perimetro * apotema) / 2;
+        } else { // operacion == 2
+            System.out.print("Ingrese el lado del pentágono: ");
+            double lado = obtenerEntradaDouble(scanner);
+            return 5 * lado;
+        }
+    }
+
+    private static double obtenerEntradaDouble(Scanner scanner) {
+        while (!scanner.hasNextDouble()) {
+            System.out.println("Entrada no válida. Por favor ingrese un número.");
+            scanner.next(); // Limpiar entrada incorrecta
+        }
+        return scanner.nextDouble();
+    }
+
+    private static void mostrarResultados(double[] resultados, int count) {
+        if (count == 0) {
+            System.out.println("No hay resultados para mostrar.");
+            return;
+        }
+
+        System.out.println("Resultados almacenados:");
+        for (int i = 0; i < count; i++) {
+            System.out.println("Resultado " + (i + 1) + ": " + resultados[i]);
+        }
+    }
+}
