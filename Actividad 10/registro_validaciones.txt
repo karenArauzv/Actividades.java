@@ -1,0 +1,5 @@
+Contraseña: CasaGrande25- | La contraseña Cumple con el criterio de presencia de caracteres especiales
+Contraseña: CasaGrande25- | La contraseña Cumple con el criterio de al menos un número
+Contraseña: CasaGrande25- | La contraseña Cumple con el criterio de al menos dos letras mayúsculas
+Contraseña: CasaGrande25- | La contraseña Cumple con el criterio de al menos tres letras minúsculas
+Contraseña: CasaGrande25- | La contraseña Cumple con el criterio de longitud mínima de 8 caracteres
